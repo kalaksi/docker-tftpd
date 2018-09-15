@@ -23,7 +23,7 @@ See the ```Tags``` tab on Docker Hub for specifics. Basically you have:
 - Minor versioned tags (follow Semantic Versioning), e.g. ```1.1``` which would follow branch ```1.1.x``` on GitHub.
 
 #### Configuration
-The user should populate ```/tftpboot/boot with bootable images and usually replace the ```/tftpboot/syslinux/pxelinux.cfg``` directory with one having the appropriate configuration. 
+The user should populate ```/tftpboot/boot``` with bootable images and usually replace the ```/tftpboot/syslinux/pxelinux.cfg``` directory with one having the appropriate configuration. 
 
 Here's an overview of the directory structure with an example boot image for LibreELEC.
 ```
@@ -37,7 +37,7 @@ Here's an overview of the directory structure with an example boot image for Lib
      └── ...
  
 ```
-
+  
 And this could be the contents for custom ```pxelinux.cfg/default```:
 ```
 DEFAULT menu.c32
