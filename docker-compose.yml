@@ -1,0 +1,21 @@
+version: '2'
+services:
+  tftpd:
+    image: kalaksi/tftpd
+    container_name: tftpd
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETUID
+      - SETGID
+      - SYS_CHROOT
+    ports:
+      - 69:1069/udp
+    volumes:
+      - tftpd_boot:/tftpboot/boot
+      - tftpd_configuration:/tftpboot/syslinux/pxelinux.cfg:ro
+
+volumes:
+  tftpd_boot: {}
+  tftpd_configuration: {}
+
