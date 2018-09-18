@@ -10,7 +10,7 @@ This container runs a TFTP server with a prepopulated ```/tftpboot``` directory 
 **Simply put, this container has been written with simplicity and security in mind.**
 
 Surprisingly, _many_ community containers run unnecessarily with root privileges by default and don't provide help for dropping unneeded CAPabilities either.
-Additionally, overly complex shell scripts and unofficial base images make it harder to verify the source.  
+Additionally, overly complex shell scripts and unofficial base images make it harder to verify the source and keep images up-to-date.  
 
 To remedy the situation, these images have been written with security and simplicity in mind. See [Design Goals](#design-goals) further down.
 
