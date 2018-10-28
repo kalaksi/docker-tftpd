@@ -34,6 +34,7 @@ Here's an overview of the directory structure with an example boot image for Lib
  │   └── libreelec
  │       └── KERNEL
  └── syslinux               <- Contains files and configuration directory necessary for booting with pxelinux.
+     ├── pxelinux.0         <- The BIOS file that should usually be loaded by the PXE clients. DHCP server should be configured accordingly.
      ├── boot -> ../boot
      ├── pxelinux.cfg -> ../pxelinux.cfg   
      └── ...
