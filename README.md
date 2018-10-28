@@ -23,17 +23,19 @@ See the ```Tags``` tab on Docker Hub for specifics. Basically you have:
 - Minor versioned tags (follow Semantic Versioning), e.g. ```1.1``` which would follow branch ```1.1.x``` on GitHub.
 
 #### Configuration
-The user should populate ```/tftpboot/boot``` with bootable images and usually replace the ```/tftpboot/syslinux/pxelinux.cfg``` directory with one having the appropriate configuration. 
+The user should populate ```/tftpboot/boot``` with bootable images and usually replace the ```/tftpboot/pxelinux.cfg``` directory with one having the appropriate configuration. 
 
 Here's an overview of the directory structure with an example boot image for LibreELEC.
 ```
 /tftpboot
- ├── boot                <- Place your boot images here.
+ ├── pxelinux.cfg           <- Configuration directory. Mount your own directory over this to customize.
+ │   └── default            <- Example configuration that only contains the "Boot from local disk" option.
+ ├── boot                   <- Place your boot files here.
  │   └── libreelec
  │       └── KERNEL
- └── syslinux            <- Contains files and configuration directory necessary for PXE booting.
-     ├── pxelinux.cfg    <- Configuration directory. Mount your own directory over this to customize.
-     │   └── default     <- Example configuration that only contains the "Boot from local disk" option.
+ └── syslinux               <- Contains files and configuration directory necessary for booting with pxelinux.
+     ├── boot -> ../boot
+     ├── pxelinux.cfg -> ../pxelinux.cfg   
      └── ...
  
 ```

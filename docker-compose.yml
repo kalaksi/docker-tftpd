@@ -13,7 +13,7 @@ services:
       - 69:1069/udp
     volumes:
       - tftpd_boot:/tftpboot/boot
-      - tftpd_configuration:/tftpboot/syslinux/pxelinux.cfg:ro
+      - tftpd_configuration:/tftpboot/pxelinux.cfg:ro
 
 volumes:
   tftpd_boot: {}
