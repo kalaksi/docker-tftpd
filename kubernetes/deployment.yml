@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: tftpd
+  name: tftpd
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: tftpd
+    spec:
+      restartPolicy: Always
+      containers:
+        - image: kalaksi/tftpd
+          name: tftpd
+          ports:
+            - containerPort: 1069
+              protocol: UDP
+          securityContext:
+            capabilities:
+              add:
+                - SETUID
+                - SETGID
+                - SYS_CHROOT
+              drop:
+                - ALL
+          volumeMounts:
+            - mountPath: /tftpboot/boot
+              name: tftpd-boot
+            - mountPath: /tftpboot/pxelinux.cfg
+              name: tftpd-configuration
+              readOnly: true
+
+      volumes:
+        - name: tftpd-boot
+          persistentVolumeClaim:
+            claimName: tftpd-boot
+        - name: tftpd-configuration
+          persistentVolumeClaim:
+            claimName: tftpd-configuration
+            readOnly: true

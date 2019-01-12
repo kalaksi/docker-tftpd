@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: tftpd
+  name: tftpd
+spec:
+  ports:
+  - name: "69"
+    port: 69
+    protocol: UDP
+    targetPort: 1069
+  selector:
+    io.kompose.service: tftpd
