@@ -12,7 +12,17 @@ This container runs a TFTP server with a prepopulated ```/tftpboot``` directory 
 Surprisingly, _many_ community containers run unnecessarily with root privileges by default and don't provide help for dropping unneeded CAPabilities either.
 Additionally, overly complex shell scripts and unofficial base images make it harder to verify the source and keep images up-to-date.  
 
-To remedy the situation, these images have been written with security and simplicity in mind. See [Design Goals](#design-goals) further down.
+To remedy the situation, these images have been written with security and simplicity in mind.
+
+|Requirement              |Status|Details|
+|-------------------------|:----:|-------|
+|Don't run as root        |✅    | Never run as root unless necessary.|
+|Official base image      |✅    | |
+|Drop extra CAPabilities  |✅    | See ```docker-compose.yml``` |
+|No default passwords     |✅    | No static default passwords. That would make the container insecure by default.|
+|Handle signals properly  |✅    | |
+|Simple Dockerfile        |✅    | Keep everything in the Dockerfile if reasonable.|
+|Versioned tags           |✅    | Offer versioned tags for stability.|
 
 ### Running this container
 See the example ```docker-compose.yml``` in the source repository.

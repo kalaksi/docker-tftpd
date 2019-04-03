@@ -19,8 +19,12 @@ spec:
           name: tftpd
           ports:
             - containerPort: 1069
+              hostPort: 69
+              name: 1069udp69
               protocol: UDP
           securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: false
             capabilities:
               add:
                 - SETUID
