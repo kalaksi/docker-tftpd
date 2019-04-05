@@ -2,7 +2,7 @@ version: '2'
 services:
   tftpd:
     image: kalaksi/tftpd
-    container_name: tftpd
+    restart: unless-stopped
     cap_drop:
       - ALL
     cap_add:
