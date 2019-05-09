@@ -3,6 +3,10 @@
 - [Docker Hub repository](https://registry.hub.docker.com/u/kalaksi/tftpd/)
 - [GitHub repository](https://github.com/kalaksi/docker-tftpd)
 
+## DEPRECATION WARNING
+
+This container version is deprecated! Please use a newer version instead.
+
 ### What is this container for?
 This container runs a TFTP server with a prepopulated ```/tftpboot``` directory with necessary files and configuration for PXE booting.
 
