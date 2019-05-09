@@ -16,10 +16,11 @@ To remedy the situation, these images have been written with security and simpli
 
 |Requirement              |Status|Details|
 |-------------------------|:----:|-------|
-|Don't run as root        |✅    | Never run as root unless necessary.|
+|Don't run as root        |❌    | Couldn't get tftpd to work without root (should figure out why). It drops the privileges, though.|
 |Official base image      |✅    | |
 |Drop extra CAPabilities  |✅    | See ```docker-compose.yml``` |
-|No default passwords     |✅    | No static default passwords. That would make the container insecure by default.|
+|No default passwords     |—     | (Not applicable) No static default passwords. That would make the container insecure by default. |
+|Support secrets-files    |—     | (Not applicable) Support providing e.g. passwords via files instead of environment variables. |
 |Handle signals properly  |✅    | |
 |Simple Dockerfile        |✅    | Keep everything in the Dockerfile if reasonable.|
 |Versioned tags           |✅    | Offer versioned tags for stability.|
