@@ -1,6 +1,6 @@
 
 ### Repositories
-- [Docker Hub repository](https://registry.hub.docker.com/u/kalaksi/tftpd/)
+- [Docker Hub repository](https://hub.docker.com/r/kalaksi/tftpd/)
 - [GitHub repository](https://github.com/kalaksi/docker-tftpd)
 
 ### What is this container for?
