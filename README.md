@@ -34,7 +34,8 @@ See the ```Tags``` tab on Docker Hub for specifics. Basically you have:
 - Minor versioned tags (follow Semantic Versioning), e.g. ```1.1``` which would follow branch ```1.1.x``` on GitHub.
 
 #### Configuration
-The user should populate ```/tftpboot/boot``` with bootable images and usually replace the ```/tftpboot/pxelinux.cfg``` directory with one having the appropriate configuration. 
+The user should populate ```/tftpboot/boot``` with bootable images and usually replace the ```/tftpboot/pxelinux.cfg``` directory with one having the appropriate configuration.  
+See ```docker-compose.yml``` in the source repository for an example.  
 
 Here's an overview of the directory structure with an example boot image for LibreELEC.
 ```
@@ -44,7 +45,7 @@ Here's an overview of the directory structure with an example boot image for Lib
  ├── boot                   <- Place your boot files here.
  │   └── libreelec
  │       └── KERNEL
- └── syslinux               <- Contains files and configuration directory necessary for booting with pxelinux.
+ └── syslinux               <- Contains files and configuration directory necessary for booting with pxelinux. No need to touch this.
      ├── pxelinux.0         <- The BIOS file that should usually be loaded by the PXE clients. DHCP server should be configured accordingly.
      ├── boot -> ../boot
      ├── pxelinux.cfg -> ../pxelinux.cfg   
@@ -69,17 +70,6 @@ LABEL local
     MENU LABEL Boot from local disk
     LOCALBOOT 0
 ```
-
-### Development
-#### Design Goals
-- Never run as root unless necessary.
-- No static default passwords. That would make the container insecure by default.
-- Use only official base images.
-- Provide an example ```docker-compose.yml``` that also shows what CAPabilities can be dropped.
-- Offer versioned tags for stability.
-- Try to keep everything in the Dockerfile (if reasonable, considering line count and readability).
-- Don't restrict configuration possibilities: provide a way to use native config files for the containerized application.
-- Handle signals properly.
 
 #### Contributing
 See the repository on <https://github.com/kalaksi/docker-tftpd>.
