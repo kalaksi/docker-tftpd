@@ -31,5 +31,5 @@ CMD set -eu ;\
     # Some devices such as the Raspberry Pi 4 expect files to be available directly in the TFTP root,
     # so use a boot directory with the special name "root" to have it's contents copied to the TFTP root directory.
     # See README for an example file structure for RPi.
-    [ -d /tftpboot/boot/root ] && cp -a  /tftpboot/boot/root/* /tftpboot ;\
+    [ -d /tftpboot/boot/root ] && cp -af /tftpboot/boot/root/* /tftpboot ;\
     exec in.tftpd -L -vvv -u ftp --secure --address 0.0.0.0:1069 /tftpboot
