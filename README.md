@@ -37,15 +37,21 @@ See the ```Tags``` tab on Docker Hub for specifics. Basically you have:
 The user should populate ```/tftpboot/boot``` with bootable images and usually replace the ```/tftpboot/pxelinux.cfg``` directory with one having the appropriate configuration.  
 See ```docker-compose.yml``` in the source repository for an example.  
 
-Here's an overview of the directory structure with an example boot image for LibreELEC.
+Here's an overview of the directory structure with an example boot image for LibreELEC and another for RaspBian (Raspberry Pi).
 ```
 /tftpboot
  ├── pxelinux.cfg           <- Configuration directory. Mount your own directory over this to customize.
  │   └── default            <- Example configuration that only contains the "Boot from local disk" option.
  ├── boot                   <- Place your boot files here.
- │   └── libreelec
- │       └── KERNEL
- └── syslinux               <- Contains files and configuration directory necessary for booting with pxelinux. No need to touch this.
+ │   ├── libreelec
+ │   │   └── KERNEL
+ │   └── root               <- Special directory (optional). Contents are copied to TFTP root (to /tftpboot). Useful with Raspberry Pi since it expects a certain structure. 
+ │       ├── bootcode.bin   <- This file is always required to be on the root level with RPi. Rest of the boot files can be placed in subdirs but it's not mandatory.
+ │       └── abcd1234       <- All boot files can also be placed directly under `root` if desired. See: https://www.raspberrypi.org/documentation/hardware/raspberrypi/bootmodes/net.md
+ │           ├── start.elf     
+ │           └── ...
+ │
+ └── syslinux               <- Contains prepopulated files and configuration necessary for booting with pxelinux. No need to touch this.
      ├── pxelinux.0         <- The BIOS file that should usually be loaded by the PXE clients. DHCP server should be configured accordingly.
      ├── boot -> ../boot
      ├── pxelinux.cfg -> ../pxelinux.cfg   
