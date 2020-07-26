@@ -7,10 +7,10 @@ RUN apk add --no-cache tftp-hpa
 
 # Help setting up the basic pxelinux environment
 RUN apk add --no-cache --virtual syslinux_with_deps syslinux && \
-    mkdir -p /tftpboot && \
+    mkdir -p -m 0755 /tftpboot && \
     cp -r /usr/share/syslinux /tftpboot && \
     find /tftpboot -type f -exec chmod 444 {} \;  && \
-    find /tftpboot -type d -exec chmod 555 {} \;  && \
+    find /tftpboot -mindepth 1 -type d -exec chmod 555 {} \;  && \
     # Not all systems use pxelinux for PXE (e.g. u-boot). Therefore, the actual directories are 
     # placed in the tftp root and symlinks are provided for the syslinux environment.
     ln -s ../boot /tftpboot/syslinux/boot && \
