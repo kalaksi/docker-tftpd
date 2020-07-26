@@ -17,6 +17,7 @@ RUN apk add --no-cache --virtual syslinux_with_deps syslinux && \
     ln -s ../pxelinux.cfg /tftpboot/syslinux/pxelinux.cfg && \
     apk del syslinux_with_deps
 
+# Default configuration that can be overridden
 COPY pxelinux.cfg /tftpboot/pxelinux.cfg
 
 EXPOSE 1069/udp
@@ -26,5 +27,8 @@ VOLUME /tftpboot/boot
 # The daemon doesn't seem to work if container is not run as root, but it still drops the root
 # privileges with the -u option.
 # Note that the main process still runs as root, but files are being served as non-root.
-ENTRYPOINT ["in.tftpd"]
-CMD ["-L", "-vvv", "-u", "ftp", "--secure", "--address", "0.0.0.0:1069", "/tftpboot"]
+CMD set -eu ;\
+    # Some devices such as the Raspberry Pi 4 expect files to be available directly in the TFTP root, so
+    # use a boot directory with the special name "root" to have it's contents copied to the TFTP root directory.
+    [ -d /tftpboot/boot/root ] && cp -a  /tftpboot/boot/root/* /tftpboot ;\
+    exec in.tftpd -L -vvv -u ftp --secure --address 0.0.0.0:1069 /tftpboot
