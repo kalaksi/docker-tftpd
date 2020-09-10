@@ -4,7 +4,8 @@
 - [GitHub repository](https://github.com/kalaksi/docker-tftpd)
 
 ### What is this container for?
-This container runs a TFTP server with a prepopulated ```/tftpboot``` directory with necessary files and configuration for PXE booting.
+This container runs a TFTP server with a prepopulated ```/tftpboot``` directory with necessary files and configuration for PXE booting.  
+Also compatible with U-Boot and Raspberry Pi 4.
 
 ### Why use this container?
 **Simply put, this container has been written with simplicity and security in mind.**
@@ -40,7 +41,7 @@ See ```docker-compose.yml``` in the source repository for an example.
 Here's an overview of the directory structure with an example boot image for LibreELEC and another for RaspBian (Raspberry Pi).
 ```
 /tftpboot
- ├── pxelinux.cfg           <- Configuration directory. Mount your own directory over this to customize.
+ ├── pxelinux.cfg           <- Configuration directory (for pxelinux). Mount your own directory over this to customize.
  │   └── default            <- Example configuration that only contains the "Boot from local disk" option.
  ├── boot                   <- Place your boot files here.
  │   ├── libreelec
