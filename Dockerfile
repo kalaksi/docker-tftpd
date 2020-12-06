@@ -15,6 +15,9 @@ RUN apk add --no-cache --virtual syslinux_with_deps syslinux && \
     # placed in the tftp root and symlinks are provided for the syslinux environment.
     ln -s ../boot /tftpboot/syslinux/boot && \
     ln -s ../pxelinux.cfg /tftpboot/syslinux/pxelinux.cfg && \
+    # These will point to the symlinks above.
+    ln -s ../boot /tftpboot/syslinux/efi64/boot && \
+    ln -s ../pxelinux.cfg /tftpboot/syslinux/efi64/pxelinux.cfg && \
     apk del syslinux_with_deps
 
 # Default configuration that can be overridden

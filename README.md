@@ -35,6 +35,7 @@ See the ```Tags``` tab on Docker Hub for specifics. Basically you have:
 - Minor versioned tags (follow Semantic Versioning), e.g. ```1.1``` which would follow branch ```1.1.x``` on GitHub.
 
 #### Configuration
+
 The user should populate ```/tftpboot/boot``` with bootable images and usually replace the ```/tftpboot/pxelinux.cfg``` directory with one having the appropriate configuration.  
 See ```docker-compose.yml``` in the source repository for an example.  
 
@@ -52,8 +53,10 @@ Here's an overview of the directory structure with an example boot image for Lib
  │           ├── start.elf     
  │           └── ...
  │
- └── syslinux               <- Contains prepopulated files and configuration necessary for booting with pxelinux. No need to touch this.
-     ├── pxelinux.0         <- The BIOS file that should usually be loaded by the PXE clients. DHCP server should be configured accordingly.
+ └── syslinux               <- Contains prepopulated files and configuration necessary for booting with Syslinux. No need to touch this.
+     ├── pxelinux.0         <- The BIOS bootloader (legacy) that is commonly loaded by the PXE clients. DHCP server should point clients to path "syslinux/pxelinux.0".
+     ├── efi64
+     │   └── syslinux.efi   <- The UEFI bootloader (64-bit). DHCP server should point clients to path "syslinux/efi64/syslinux.efi".
      ├── boot -> ../boot
      ├── pxelinux.cfg -> ../pxelinux.cfg   
      └── ...
