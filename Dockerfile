@@ -3,6 +3,8 @@
 
 FROM alpine:3.12.1
 
+ENV TFTPD_EXTRA_ARGS=""
+
 RUN apk add --no-cache tftp-hpa
 
 # Help setting up the basic pxelinux environment
@@ -35,4 +37,4 @@ CMD set -eu ;\
     # so use a boot directory with the special name "root" to have it's contents copied to the TFTP root directory.
     # See README for an example file structure for RPi.
     [ -d /tftpboot/boot/root ] && cp -af /tftpboot/boot/root/* /tftpboot ;\
-    exec in.tftpd -L -vvv -u ftp --secure --address 0.0.0.0:1069 /tftpboot
+    exec in.tftpd -L -vvv -u ftp --secure --address 0.0.0.0:1069 $TFTPD_EXTRA_ARGS /tftpboot

@@ -3,6 +3,9 @@ services:
   tftpd:
     image: kalaksi/tftpd
     restart: unless-stopped
+    environment:
+      # Search the man page for --blocksize to learn more
+      TFTPD_EXTRA_ARGS: '--blocksize 1468'
     cap_drop:
       - ALL
     cap_add:
