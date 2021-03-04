@@ -56,7 +56,7 @@ Here's an overview of the directory structure with an example boot image for Lib
  └── syslinux               <- Contains prepopulated files and configuration necessary for booting with Syslinux. No need to touch this.
      ├── pxelinux.0         <- The BIOS bootloader (legacy) that is commonly loaded by the PXE clients. DHCP server should point clients to path "syslinux/pxelinux.0".
      ├── efi64
-     │   └── syslinux.efi   <- The UEFI bootloader (64-bit). DHCP server should point clients to path "syslinux/efi64/syslinux.efi".
+     │   └── syslinux.efi   <- The UEFI bootloader (64-bit) (Note: UEFI + Syslinux may have more issues like slow transfer speeds). Clients should be pointed to "syslinux/efi64/syslinux.efi".
      ├── boot -> ../boot
      ├── pxelinux.cfg -> ../pxelinux.cfg   
      └── ...
