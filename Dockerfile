@@ -5,22 +5,27 @@ FROM alpine:3.13.5
 
 ENV TFTPD_EXTRA_ARGS=""
 
+# Package will be downloaded manually since armhf has no package for syslinux (#1).
+ARG SYSLINUX_PACKAGE="https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/syslinux-6.04_pre1-r6.apk"
+
 RUN apk add --no-cache tftp-hpa
 
-# Help setting up the basic pxelinux environment
-RUN apk add --no-cache --virtual syslinux_with_deps syslinux && \
+# Help setting up the basic pxelinux environment.
+RUN mkdir /tmp/syslinux && \
+    wget "$SYSLINUX_PACKAGE" -O /tmp/syslinux/syslinux.apk && \
+    tar -C /tmp/syslinux -xvf /tmp/syslinux/syslinux.apk && \
     mkdir -p -m 0755 /tftpboot && \
-    cp -r /usr/share/syslinux /tftpboot && \
+    cp -r /tmp/syslinux/usr/share/syslinux /tftpboot && \
+    rm -rf /tmp/syslinux && \
     find /tftpboot -type f -exec chmod 444 {} \;  && \
     find /tftpboot -mindepth 1 -type d -exec chmod 555 {} \;  && \
     # Not all systems use pxelinux for PXE (e.g. u-boot). Therefore, the actual directories are 
     # placed in the tftp root and symlinks are provided for the syslinux environment.
     ln -s ../boot /tftpboot/syslinux/boot && \
     ln -s ../pxelinux.cfg /tftpboot/syslinux/pxelinux.cfg && \
-    # These will point to the symlinks above.
+    # EFI alternatives. These will point to the symlinks above.
     ln -s ../boot /tftpboot/syslinux/efi64/boot && \
-    ln -s ../pxelinux.cfg /tftpboot/syslinux/efi64/pxelinux.cfg && \
-    apk del syslinux_with_deps
+    ln -s ../pxelinux.cfg /tftpboot/syslinux/efi64/pxelinux.cfg
 
 # Default configuration that can be overridden
 COPY pxelinux.cfg /tftpboot/pxelinux.cfg
