@@ -1,12 +1,12 @@
 # Copyright (c) 2018 kalaksi@users.noreply.github.com.
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 
-FROM alpine:3.13.5
+FROM alpine:3.14.2
 
 ENV TFTPD_EXTRA_ARGS=""
 
 # Package will be downloaded manually since armhf has no package for syslinux (#1).
-ARG SYSLINUX_PACKAGE="https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/syslinux-6.04_pre1-r6.apk"
+ARG SYSLINUX_PACKAGE="https://dl-cdn.alpinelinux.org/alpine/v3.14/main/x86_64/syslinux-6.04_pre1-r9.apk"
 
 RUN apk add --no-cache tftp-hpa
 
