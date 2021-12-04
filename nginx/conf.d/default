@@ -1,0 +1,11 @@
+server {
+    listen 8080;
+    listen [::]:8080 default_server;
+    server_name _;
+
+    root /var/www/default;
+
+    location / {
+        index  index.html;
+    }
+}

@@ -30,8 +30,7 @@ services:
   #     - SETUID
   #     - SETGID
   #   volumes:
-  #     # TODO
-  #     # - ./nginx-conf.d:/etc/nginx/conf.d:ro
+  #     - ./nginx/conf.d:/etc/nginx/conf.d:ro
   #     - tftpd_boot:/var/www/default/boot
   #   ports:
   #     - 8080:8080
