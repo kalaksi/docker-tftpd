@@ -91,7 +91,9 @@ To utilize HTTP instead, `kernel` and `append` have to include the HTTP server a
     append initrd=http://HTTP_SERVER_IP/boot/ubuntu/initrd.img <REST_OF_THE_BOOT_PARAMETERS>
 ```
 
-`docker-compose.yml` includes a service (commented out) for using nginx to serve boot files over HTTP.
+`docker-compose.yml` includes a service (commented out) for using nginx to serve boot files over HTTP.  
+Since Nginx by default only includes files in "conf.d" which end with ".conf", you need to copy and adjust the provided
+"default" Nginx configuration to a filename which ends with ".conf" e.g "tftpd.conf".
 
 ### Contributing
 See the repository on <https://github.com/kalaksi/docker-tftpd>.
