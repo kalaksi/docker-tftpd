@@ -3,6 +3,7 @@
 
 FROM alpine:3.16.2
 
+ENV TFTPD_BIND_ADDRESS="0.0.0.0:1069"
 ENV TFTPD_EXTRA_ARGS=""
 
 # Package will be downloaded manually since armhf has no package for syslinux (#1).
@@ -42,4 +43,4 @@ CMD set -eu ;\
     # so use a boot directory with the special name "root" to have it's contents copied to the TFTP root directory.
     # See README for an example file structure for RPi.
     [ -d /tftpboot/boot/root ] && cp -af /tftpboot/boot/root/* /tftpboot ;\
-    exec in.tftpd -L -vvv -u ftp --secure --address 0.0.0.0:1069 $TFTPD_EXTRA_ARGS /tftpboot
+    exec in.tftpd -L -vvv -u ftp --secure --address "$TFTPD_BIND_ADDRESS" $TFTPD_EXTRA_ARGS /tftpboot
