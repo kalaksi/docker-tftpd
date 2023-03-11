@@ -1,7 +1,7 @@
 default:
-  image: docker:20.10
+  image: docker:23
   services:
-    - docker:20.10-dind
+    - docker:23-dind
 
 stages:
   - build
