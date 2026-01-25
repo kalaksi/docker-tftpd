@@ -1,7 +1,7 @@
 # Copyright (c) 2018 kalaksi@users.noreply.github.com.
 # This work is licensed under the terms of the MIT license. For a copy, see <https://opensource.org/licenses/MIT>.
 
-FROM alpine:3.22.2
+FROM alpine:3.23.2
 
 ENV TFTPD_BIND_ADDRESS="0.0.0.0:1069"
 ENV TFTPD_EXTRA_ARGS=""
